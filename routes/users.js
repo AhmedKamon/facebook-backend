@@ -68,7 +68,7 @@ router.put('/:id/follow', async (req, res) => {
     res.status(403).json('you cant follow yourself');
   }
 });
-//unfollow users
+//unfollow users by using id
 router.put('/:id/unfollow', async (req, res) => {
   if (req.body.id !== req.params.id) {
     try {
