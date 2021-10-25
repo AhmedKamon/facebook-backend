@@ -1,9 +1,13 @@
 const router = require('express').Router();
+const imageUpload = require('../middleware/imageUploades');
 const Post = require('../models/Post');
 const User = require('../models/User');
 
 //create a post
-router.post('/', async (req, res) => {
+router.post('/', imageUpload, async (req, res) => {
+  if (req.files[0]) {
+    req.body.img = `/images/${req.files[0].filename}`;
+  }
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
